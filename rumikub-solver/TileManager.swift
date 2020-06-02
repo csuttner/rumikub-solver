@@ -76,10 +76,4 @@ class TileManager {
             }
         }
     }
-    
-    func setUpScenario(symbolsOnRack: [String], symbolsOnTable: [String]) {
-        // array should not contain more than two of the same symbol...
-        
-        
-    }
 }

@@ -11,9 +11,25 @@ import UIKit
 
 class TileSolver {
     
-    static func determineSets() {
-            
+    static func determineSets(population: [Tile]) -> [[Tile]] {
         
+        let reds = population.filter { (tile) -> Bool in
+            return tile.color == .red
+        }
+        
+        let teals = population.filter { (tile) -> Bool in
+            return tile.color == .systemTeal
+        }
+        
+        let oranges = population.filter { (tile) -> Bool in
+            return tile.color == .orange
+        }
+        
+        let blacks = population.filter { (tile) -> Bool in
+            return tile.color == .black
+        }
+        
+        return [teals, blacks, reds, oranges]
     }
     
 }

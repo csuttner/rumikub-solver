@@ -8,7 +8,7 @@
 
 import UIKit
 
-let tileCellID = "Tile Cell ID"
+let MainTileCellID = "Main Tile Cell ID"
 
 class MainCollectionView: UICollectionViewController {
     
@@ -35,7 +35,7 @@ class MainCollectionView: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.register(TileCell.self, forCellWithReuseIdentifier: tileCellID)
+        collectionView.register(TileCell.self, forCellWithReuseIdentifier: MainTileCellID)
         
         let safe = view.safeAreaLayoutGuide
         
@@ -61,6 +61,10 @@ class MainCollectionView: UICollectionViewController {
     
     @objc func solve() {
         drawButton.isEnabled = false
+        let answer = TileSolver.determineSets(population: rack)
+        let answerCollection = AnswerCollectionView(collectionViewLayout: UICollectionViewFlowLayout(), answer: answer)
+        answerCollection.preferredContentSize = CGSize(width: view.frame.width, height: view.frame.height)
+        present(answerCollection, animated: true, completion: nil)
     }
 
 }
@@ -73,7 +77,7 @@ extension MainCollectionView {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: tileCellID, for: indexPath) as! TileCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainTileCellID, for: indexPath) as! TileCell
         cell.configureCell(for: rack[indexPath.row])
         return cell
     }

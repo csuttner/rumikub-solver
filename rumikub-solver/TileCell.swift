@@ -14,7 +14,7 @@ class TileCell: UICollectionViewCell {
     let label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 90)
+        label.font = UIFont.boldSystemFont(ofSize: 40)
         return label
     }()
     
