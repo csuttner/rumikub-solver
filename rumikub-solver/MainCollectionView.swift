@@ -12,10 +12,8 @@ let MainTileCellID = "Main Tile Cell ID"
 
 class MainCollectionView: UICollectionViewController {
     
-    var rack = [Tile]()
-    
     let tileManager = TileManager()
-    
+    let solver = TileSolver()
     let drawButton = MainButton(self, action: #selector(drawTile), title: "Draw Tile")
     let clearButton = MainButton(self, action: #selector(clear), title: "Clear Tiles")
     let solveButton = MainButton(self, action: #selector(solve), title: "Solve Set")
@@ -46,14 +44,11 @@ class MainCollectionView: UICollectionViewController {
     }
     
     @objc func drawTile() {
-        if let tile = tileManager.drawRandom() {
-            rack.append(tile)
-        }
+        tileManager.drawRandom()
         collectionView.reloadData()
     }
     
     @objc func clear() {
-        rack = [Tile]()
         tileManager.resetPool()
         collectionView.reloadData()
         drawButton.isEnabled = true
@@ -61,10 +56,10 @@ class MainCollectionView: UICollectionViewController {
     
     @objc func solve() {
         drawButton.isEnabled = false
-        let answer = TileSolver.determineSets(population: rack)
-        let answerCollection = AnswerCollectionView(collectionViewLayout: UICollectionViewFlowLayout(), answer: answer)
-        answerCollection.preferredContentSize = CGSize(width: view.frame.width, height: view.frame.height)
-        present(answerCollection, animated: true, completion: nil)
+        if let answer = solver.determineSets(population: tileManager.table) {
+            let answerCollection = AnswerCollectionView(collectionViewLayout: UICollectionViewFlowLayout(), answer: answer)
+            present(answerCollection, animated: true, completion: nil)
+        }
     }
 
 }
@@ -73,12 +68,12 @@ class MainCollectionView: UICollectionViewController {
 extension MainCollectionView {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return rack.count
+        return tileManager.table.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainTileCellID, for: indexPath) as! TileCell
-        cell.configureCell(for: rack[indexPath.row])
+        cell.configureCell(for: tileManager.table[indexPath.row])
         return cell
     }
     

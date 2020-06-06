@@ -11,42 +11,37 @@ import UIKit
 
 enum TileLocation {
     case pool
-    case rack
     case table
 }
 
 class TileManager {
     
-    var pool: Set<Tile>
-    var rack: Set<Tile>
-    var table: Set<Tile>
+    var pool: [Tile]
+    var table: [Tile]
     
     init() {
-        var allTiles: Set<Tile> = []
+        var allTiles = [Tile]()
         let colors: [String: UIColor] = ["T": .systemTeal, "B": .black, "R": .red, "O": .orange]
         
         for number in 1...13 {
             for color in colors {
                 let symbol = color.key + String(format: "%02d", number)
-                allTiles.insert(Tile(symbol: symbol, number: number, color: color.value, copy: .first))
-                allTiles.insert(Tile(symbol: symbol, number: number, color: color.value, copy: .second))
+                allTiles.append(Tile(symbol: symbol, number: number, color: color.value, copy: .first))
+                allTiles.append(Tile(symbol: symbol, number: number, color: color.value, copy: .second))
             }
         }
         
         self.pool = allTiles
-        self.rack = []
         self.table = []
     }
     
     func printTileLocation(_ tileLocation: TileLocation) {
         
-        let locationToPrint: Set<Tile>
+        let locationToPrint: [Tile]
         
         switch tileLocation {
         case .pool:
             locationToPrint = pool
-        case .rack:
-            locationToPrint = rack
         case .table:
             locationToPrint = table
         }
@@ -56,23 +51,21 @@ class TileManager {
         }
     }
     
-    func drawRandom() -> Tile? {
-        if let randomTile = pool.randomElement() {
-            rack.insert(randomTile)
-            pool.remove(randomTile)
-            return randomTile
+    func drawRandom() {
+        if let randomTile = pool.randomElement(), let tileIndex = pool.firstIndex(of: randomTile) {
+            table.append(randomTile)
+            pool.remove(at: tileIndex)
         } else {
             print("No tiles left in pool")
-            return nil
         }
         
     }
     
     func resetPool() {
-        while rack.count > 0 {
-            if let randomTile = rack.randomElement() {
-                rack.remove(randomTile)
-                pool.insert(randomTile)
+        while table.count > 0 {
+            if let randomTile = table.randomElement(), let tileIndex = table.firstIndex(of: randomTile) {
+                table.remove(at: tileIndex)
+                pool.append(randomTile)
             }
         }
     }
