@@ -17,7 +17,8 @@
 		F37B6A54243E34670076E5D7 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37B6A53243E34670076E5D7 /* Tile.swift */; };
 		F37B6A56243E454A0076E5D7 /* TileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37B6A55243E454A0076E5D7 /* TileManager.swift */; };
 		F3864717248B5BDF00B928B5 /* TileGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3864716248B5BDF00B928B5 /* TileGroup.swift */; };
-		F39636B82485C9C900FA7FF6 /* AnswerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39636B72485C9C900FA7FF6 /* AnswerCollectionView.swift */; };
+		F39636B82485C9C900FA7FF6 /* AnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39636B72485C9C900FA7FF6 /* AnswerView.swift */; };
+		F39F2451248EF9480033F132 /* Scenarios.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39F2450248EF9480033F132 /* Scenarios.swift */; };
 		F3C539CC24788A83005D2C47 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C539CB24788A83005D2C47 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,7 +35,8 @@
 		F37B6A53243E34670076E5D7 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		F37B6A55243E454A0076E5D7 /* TileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileManager.swift; sourceTree = "<group>"; };
 		F3864716248B5BDF00B928B5 /* TileGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileGroup.swift; sourceTree = "<group>"; };
-		F39636B72485C9C900FA7FF6 /* AnswerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCollectionView.swift; sourceTree = "<group>"; };
+		F39636B72485C9C900FA7FF6 /* AnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerView.swift; sourceTree = "<group>"; };
+		F39F2450248EF9480033F132 /* Scenarios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenarios.swift; sourceTree = "<group>"; };
 		F3C539CB24788A83005D2C47 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,12 +73,13 @@
 				F37B6A3D243E33010076E5D7 /* AppDelegate.swift */,
 				F37B6A3F243E33010076E5D7 /* SceneDelegate.swift */,
 				F37B6A41243E33010076E5D7 /* MainCollectionView.swift */,
-				F39636B72485C9C900FA7FF6 /* AnswerCollectionView.swift */,
+				F39636B72485C9C900FA7FF6 /* AnswerView.swift */,
 				F37B6A51243E33FA0076E5D7 /* TileCell.swift */,
 				F37B6A55243E454A0076E5D7 /* TileManager.swift */,
 				F314C1D7243E5C8B00C25C84 /* TileSolver.swift */,
 				F3864716248B5BDF00B928B5 /* TileGroup.swift */,
 				F37B6A53243E34670076E5D7 /* Tile.swift */,
+				F39F2450248EF9480033F132 /* Scenarios.swift */,
 				F3C539CB24788A83005D2C47 /* Extensions.swift */,
 				F37B6A46243E33030076E5D7 /* Assets.xcassets */,
 				F37B6A48243E33030076E5D7 /* LaunchScreen.storyboard */,
@@ -157,8 +160,9 @@
 			files = (
 				F37B6A42243E33010076E5D7 /* MainCollectionView.swift in Sources */,
 				F314C1D8243E5C8B00C25C84 /* TileSolver.swift in Sources */,
+				F39F2451248EF9480033F132 /* Scenarios.swift in Sources */,
 				F37B6A3E243E33010076E5D7 /* AppDelegate.swift in Sources */,
-				F39636B82485C9C900FA7FF6 /* AnswerCollectionView.swift in Sources */,
+				F39636B82485C9C900FA7FF6 /* AnswerView.swift in Sources */,
 				F3C539CC24788A83005D2C47 /* Extensions.swift in Sources */,
 				F3864717248B5BDF00B928B5 /* TileGroup.swift in Sources */,
 				F37B6A54243E34670076E5D7 /* Tile.swift in Sources */,

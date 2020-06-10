@@ -56,10 +56,9 @@ class MainCollectionView: UICollectionViewController {
     
     @objc func solve() {
         drawButton.isEnabled = false
-        if let answer = solver.determineSets(population: tileManager.table) {
-            let answerCollection = AnswerCollectionView(collectionViewLayout: UICollectionViewFlowLayout(), answer: answer)
-            present(answerCollection, animated: true, completion: nil)
-        }
+        let answer = solver.determineSets(population: tileManager.table)
+        let answerView = AnswerView(answer: answer)
+        present(answerView, animated: true, completion: nil)
     }
 
 }

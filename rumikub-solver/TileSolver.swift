@@ -11,58 +11,69 @@ import UIKit
 
 class TileSolver {
     
-    let memo = [Tile]()
+    // memo
+    var groups = [TileGroup]()
+    var recursiveCalls = 0
     
-    func determineSets(population: [Tile]) -> [[Tile]]? {
-        var pop = population
-        if let randomElement = population.randomElement(), let index = pop.firstIndex(of: randomElement) {
-            pop.remove(at: index)
-            return bruteForce(candidate: [randomElement], population: pop)
-        }
-        return nil
+    func determineSets(population: [Tile]) -> TileGroup {
+        let group = TileGroup(population: population)
+        getSets(group: group)
+        let solution = bestSolution(from: groups)
+        
+//        var counter = 0
+//        for group in groups {
+//            print("group #: \(counter)")
+//
+//            print("population:")
+//            group.printPopulation()
+//
+//            print("sets:")
+//            group.printSets()
+//
+//            counter += 1
+//            print("\n")
+//        }
+        
+        print(recursiveCalls)
+        recursiveCalls = 0
+        self.groups = [TileGroup]()
+        return solution
     }
     
-    func bruteForce(candidate: [Tile], population: [Tile]) -> [[Tile]] {
-        var cand = candidate
-        var pop = population
-        var colors = [UIColor]()
-        for item in cand {
-            colors.append(item.color)
-        }
-        if let first = cand.first {
-            print(first.number)
-            let match = pop.first { (tile) -> Bool in
-                return tile.number == first.number && !colors.contains(tile.color)
-            }
-            if let match = match {
-                cand.append(match)
-                if let index = pop.firstIndex(of: match) {
-                    pop.remove(at: index)
+    func getSets(group: TileGroup) {
+        
+        // stop condition - if nil then population is empty
+        if let firstNumber = group.population.first?.number {
+
+            // if there are candidates for sets of this number in the population
+            if let setCandidates = group.getSetCandidates(for: firstNumber) {
+                for candidate in setCandidates {
+                    let newGroup = group.copy()
+                    newGroup.pullSet(tileSet: candidate)
+                    recursiveCalls += 1
+                    getSets(group: newGroup)
                 }
+            } else {
+                // there are no candidates, remove this tile from the population and recurse
+                let newGroup = group.copy()
+                newGroup.population.remove(at: 0)
+                recursiveCalls += 1
+                getSets(group: newGroup)
             }
         }
-        return [cand, pop]
+        groups.append(group)
     }
     
-    func orderByColor(population: [Tile]) -> [[Tile]] {
-        
-        let reds = population.filter { (tile) -> Bool in
-            return tile.color == .red
+    func bestSolution(from groups: [TileGroup]) -> TileGroup {
+        var highScore = 0
+        var best = TileGroup(population: [Tile]())
+        for group in groups {
+            if group.getScore() >= highScore {
+                highScore = group.getScore()
+                best = group
+            }
         }
-        
-        let teals = population.filter { (tile) -> Bool in
-            return tile.color == .systemTeal
-        }
-        
-        let oranges = population.filter { (tile) -> Bool in
-            return tile.color == .orange
-        }
-        
-        let blacks = population.filter { (tile) -> Bool in
-            return tile.color == .black
-        }
-        
-        return [teals, blacks, reds, oranges]
+        return best
     }
     
 }

@@ -9,23 +9,20 @@
 import Foundation
 import UIKit
 
-struct Tile: Hashable {
+class Tile: Equatable {
     
-    enum Copy {
-        case first
-        case second
-    }
-    
-    let symbol: String
     let number: Int
     let color: UIColor
-    let copy: Copy
+    let symbol: String
     
-    init(symbol: String, number: Int, color: UIColor, copy: Copy) {
+    init(number: Int, color: UIColor) {
         self.number = number
         self.color = color
-        self.symbol = symbol
-        self.copy = copy
+        self.symbol = rkColors[color]! + String(number)
     }
     
+}
+
+func ==(lhs: Tile, rhs: Tile) -> Bool {
+    return lhs.color == rhs.color && lhs.number == rhs.number
 }

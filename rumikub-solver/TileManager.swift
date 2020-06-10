@@ -9,10 +9,7 @@
 import Foundation
 import UIKit
 
-enum TileLocation {
-    case pool
-    case table
-}
+let rkColors: [UIColor: String] = [.systemTeal : "T", .red : "R", .black : "B", .orange : "O"]
 
 class TileManager {
     
@@ -21,13 +18,11 @@ class TileManager {
     
     init() {
         var allTiles = [Tile]()
-        let colors: [String: UIColor] = ["T": .systemTeal, "B": .black, "R": .red, "O": .orange]
         
         for number in 1...13 {
-            for color in colors {
-                let symbol = color.key + String(format: "%02d", number)
-                allTiles.append(Tile(symbol: symbol, number: number, color: color.value, copy: .first))
-                allTiles.append(Tile(symbol: symbol, number: number, color: color.value, copy: .second))
+            for color in rkColors {
+                allTiles.append(Tile(number: number, color: color.key))
+                allTiles.append(Tile(number: number, color: color.key))
             }
         }
         
@@ -35,20 +30,9 @@ class TileManager {
         self.table = []
     }
     
-    func printTileLocation(_ tileLocation: TileLocation) {
-        
-        let locationToPrint: [Tile]
-        
-        switch tileLocation {
-        case .pool:
-            locationToPrint = pool
-        case .table:
-            locationToPrint = table
-        }
-        
-        for tile in locationToPrint {
-            print(tile.symbol)
-        }
+    init(scenario: [Tile]) {
+        self.pool = scenario
+        self.table = []
     }
     
     func drawRandom() {
@@ -58,7 +42,6 @@ class TileManager {
         } else {
             print("No tiles left in pool")
         }
-        
     }
     
     func resetPool() {
