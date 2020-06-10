@@ -13,29 +13,11 @@ class TileSolver {
     
     // memo
     var groups = [TileGroup]()
-    var recursiveCalls = 0
     
     func determineSets(population: [Tile]) -> TileGroup {
         let group = TileGroup(population: population)
         getSets(group: group)
         let solution = bestSolution(from: groups)
-        
-//        var counter = 0
-//        for group in groups {
-//            print("group #: \(counter)")
-//
-//            print("population:")
-//            group.printPopulation()
-//
-//            print("sets:")
-//            group.printSets()
-//
-//            counter += 1
-//            print("\n")
-//        }
-        
-        print(recursiveCalls)
-        recursiveCalls = 0
         self.groups = [TileGroup]()
         return solution
     }
@@ -50,14 +32,12 @@ class TileSolver {
                 for candidate in setCandidates {
                     let newGroup = group.copy()
                     newGroup.pullSet(tileSet: candidate)
-                    recursiveCalls += 1
                     getSets(group: newGroup)
                 }
             } else {
                 // there are no candidates, remove this tile from the population and recurse
                 let newGroup = group.copy()
                 newGroup.population.remove(at: 0)
-                recursiveCalls += 1
                 getSets(group: newGroup)
             }
         }

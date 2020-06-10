@@ -15,7 +15,7 @@ class AnswerView: UIViewController {
     
     let answer: TileGroup
     let setsCollectionView = UICollectionView(frame: CGRect(), collectionViewLayout: UICollectionViewFlowLayout())
-    let runsCollectionView = UICollectionView(frame: CGRect(), collectionViewLayout: UICollectionViewFlowLayout())
+//    let runsCollectionView = UICollectionView(frame: CGRect(), collectionViewLayout: UICollectionViewFlowLayout())
     lazy var tileWidth = (view.frame.width / 13) - 1
     
     init(answer: TileGroup) {
@@ -35,13 +35,13 @@ class AnswerView: UIViewController {
     
     func configureCollectionViews() {
         setsCollectionView.delegate = self
-        runsCollectionView.delegate = self
+//        runsCollectionView.delegate = self
         
         setsCollectionView.dataSource = self
-        runsCollectionView.dataSource = self
+//        runsCollectionView.dataSource = self
         
         setsCollectionView.register(TileCell.self, forCellWithReuseIdentifier: answerTileCellID)
-        runsCollectionView.register(TileCell.self, forCellWithReuseIdentifier: answerTileCellID)
+//        runsCollectionView.register(TileCell.self, forCellWithReuseIdentifier: answerTileCellID)
     }
     
     func setupCollectionViews() {
@@ -63,9 +63,9 @@ extension AnswerView: UICollectionViewDelegate, UICollectionViewDataSource {
         if collectionView == setsCollectionView {
             return answer.sets.count
         }
-        if collectionView == runsCollectionView {
-            return answer.runs.count
-        }
+//        if collectionView == runsCollectionView {
+//            return answer.runs.count
+//        }
         return 0
     }
     
@@ -73,9 +73,9 @@ extension AnswerView: UICollectionViewDelegate, UICollectionViewDataSource {
         if collectionView == setsCollectionView {
             return answer.sets[section].tiles.count
         }
-        if collectionView == runsCollectionView {
-            return answer.runs[section].tiles.count
-        }
+//        if collectionView == runsCollectionView {
+//            return answer.runs[section].tiles.count
+//        }
         return 0
     }
     
@@ -87,10 +87,10 @@ extension AnswerView: UICollectionViewDelegate, UICollectionViewDataSource {
             tile = answer.sets[indexPath.section].tiles[indexPath.row]
             cell.configureCell(for: tile)
         }
-        if collectionView == runsCollectionView {
-            tile = answer.runs[indexPath.section].tiles[indexPath.row]
-            cell.configureCell(for: tile)
-        }
+//        if collectionView == runsCollectionView {
+//            tile = answer.runs[indexPath.section].tiles[indexPath.row]
+//            cell.configureCell(for: tile)
+//        }
         
         return cell
     }
